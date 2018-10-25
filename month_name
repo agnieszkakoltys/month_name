@@ -40,34 +40,22 @@ if( file.good() == true )
 
 	real_month_number=month_number%12;
 
-	if( month_number = 12)
+	if(month_number==12 ||month_number%12==0)
 	{
-	real_month_number = 12;
+	real_month_number=12;
 	}
 
-	if(language_name=="polski" && month_number<=12)
+	if(language_name=="polski" && month_number>0)
 	{
 	cout << polish_months[real_month_number-1]<< endl;
 	}
-	else if(language_name=="polski" && month_number>12)
-	{
-	cout << polish_months[real_month_number]<< endl;
-	}
-	else if(language_name=="niemiecki" && month_number<=12)
+	else if(language_name=="niemiecki" && month_number>0)
 	{
 	cout << german_months[real_month_number-1]<< endl;
 	}
-	else if(language_name=="niemiecki" && month_number>12)
-	{
-	cout <<  german_months[real_month_number]<< endl;
-	}
-	else if(language_name=="angielski" && month_number<=12)
+	else if(language_name=="angielski" && month_number>0)
 	{
 	cout <<  english_months[real_month_number-1]<< endl;
-	}
-	else if(language_name=="angielski" && month_number>12)
-	{
-	cout <<  english_months[real_month_number]<< endl;
 	}
    
 	file.close();
@@ -86,9 +74,7 @@ int main()
 	   {
 
 		  polish_months[real_month_number-1] = linux_polish_months[real_month_number-1];
-		  polish_months[real_month_number] = linux_polish_months[real_month_number];
 		  german_months[real_month_number-1] = linux_german_months[real_month_number-1];
-		  german_months[real_month_number] = linux_german_months[real_month_number];
 		  fun();
 		}
 	
