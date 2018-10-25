@@ -3,5 +3,5 @@ polski
 
 readme:
 //first line input "polski" , "niemiecki" or "angielski"
-//second line mean numer of month, program don't include negative numbers
+//second line mean numer of month, program don't include negative numbers and 0
  
