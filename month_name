@@ -16,7 +16,7 @@ using namespace std;
 int month_number,real_month_number;
 char bufor[ 1024 ];
 char data[ 255 ];
-fstream file;
+fstream file, testfile;
 string language_name, polish_name[12], german_name[12];
 string polish_months[12] = {"Styczeä","Luty","Marzec","Kwiecieä","Maj","Czerwiec","Lipiec","Sierpieä","Wrzesieä","Pa«dziernik","Listopad","Grudzieä"};
 string german_months[12] = {"Januar","Februar","M„rz","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"};
@@ -30,6 +30,11 @@ void fun()
 	file.open( "conf.txt", ios::in );
 if( file.good() == true )
 {
+	if( testfile.good() == true )
+	{
+	remove("test.h");
+	};
+
 	file.getline( data, 255 ); //reading first line 
 
 	file.getline( bufor, 255 ); //reading second line 
@@ -40,7 +45,7 @@ if( file.good() == true )
 
 	real_month_number=month_number%12;
 
-	if(month_number==12 ||month_number%12==0)
+	if(month_number==12 || month_number%12==0)
 	{
 	real_month_number=12;
 	}
@@ -56,10 +61,18 @@ if( file.good() == true )
 	else if(language_name=="angielski" && month_number>0)
 	{
 	cout <<  english_months[real_month_number-1]<< endl;
-	}
-   
-	file.close();
+	} 
+	
 	} else cout << "Dostep do pliku zostal zabroniony!" << endl;
+	file.close();
+
+	fstream testfile( "test.h", ios::out );
+
+	if( testfile.good() == true )
+	{
+	testfile << "int month_number =" <<month_number<<";"<<endl;
+	testfile << "int real_month_number =" <<real_month_number<<";"<<endl;
+	};
 }
 
 int main()
@@ -67,8 +80,11 @@ int main()
 
 		if(OS_Windows)
 	{
+		
 		fun();
 		system("PAUSE");
+		
+		
 	}
 	   else if(!OS_Windows) // if OS is unix
 	   {
