@@ -12,6 +12,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <sstream>
 using namespace std;
 int month_number;
 char data[ 255 ];
@@ -37,19 +38,31 @@ void file_opening()
 	file.open( "conf.txt", ios::in );
 if( file.good() == true )
 {
-
 	file.getline( data, 255 ); //reading first line 
-
 	language_name = data;
+	
+	//Tworzenie pliku do testu
+		if( testfile.good() == true )
+	{
+	remove("test.h");
+	};
+	fstream testfile( "test.h", ios::out );
 
-	//costam = language_name + "_month";
-	//cout <<costam;
-
+	if( testfile.good() == true )
+	{
+	testfile << "int month_number =" <<month_number<<";"<<endl;
+	};
 }
 }
 public:
 void month_txt(int month_number)
 {
+	// Tworzenie zmienej uniwersalnej
+	//	 costam = language_name + "_month";
+	//	 istringstream iss (costam);
+	//	 string val;
+    //   iss >> val;
+	//	 cout<< val;
 
 	    if (month_number <= 0 || month_number > 12)    {
                  string extension = "Zla liczba";
@@ -72,21 +85,7 @@ void month_txt(int month_number)
 	 else cout << "Dostep do pliku zostal zabroniony!" << endl;
 	file.close();
 }
-public:
-void test_export()
-{
-	if( testfile.good() == true )
-	{
-	remove("test.h");
-	};
 
-	fstream testfile( "test.h", ios::out );
-
-	if( testfile.good() == true )
-	{
-	testfile << "int month_number =" <<month_number<<";"<<endl;
-	};
-}
 };
 
 int main()
@@ -100,12 +99,12 @@ int main()
 		try  
       {
 		windows.month_txt(month_number);
+	//	cout<<month_txt(month_number);
 	  }
-		   catch(std::string out)
+		   catch(string out)
       {
          cout<<out<<endl;
       }
-		windows.test_export();
 		system("PAUSE");
 		
 		
@@ -120,11 +119,11 @@ int main()
       {
 		linux.month_txt(month_number);
 	  }
-		   catch(std::string out)
+		   catch(string out)
       {
          cout<<out<<endl;
       }
-		  linux.test_export();
+		
 		}
 	
 	
