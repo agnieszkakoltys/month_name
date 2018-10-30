@@ -51,11 +51,13 @@ if( file.good() == true )
 	if( testfile.good() == true )
 	{
 	testfile << "int month_number =" <<month_number<<";"<<endl;
+	testfile << "int language_name_lenght =" <<language_name.length()<<";"<<endl;
+	
 	};
 }
 }
 public:
-void month_txt(int month_number)
+string month_txt(int month_number)
 {
 	// Tworzenie zmienej uniwersalnej
 	//	 costam = language_name + "_month";
@@ -64,7 +66,8 @@ void month_txt(int month_number)
     //   iss >> val;
 	//	 cout<< val;
 
-	    if (month_number <= 0 || month_number > 12)    {
+	    if (month_number <= 0 || month_number > 12)    
+		   {
                  string extension = "Zla liczba";
                  throw extension;
             }
@@ -72,14 +75,17 @@ void month_txt(int month_number)
 	if(language_name=="polski" && month_number>0 && month_number<13)
 	{
 	cout << polish_month[month_number-1]<< endl;
+	return polish_month[month_number-1];
 	}
 	else if(language_name=="niemiecki" && month_number>0 && month_number<13)
 	{
 	cout << german_month[month_number-1]<< endl;
+	return german_month[month_number-1];
 	}
 	else if(language_name=="angielski" && month_number>0 && month_number<13)
 	{
 	cout <<  english_month[month_number-1]<< endl;
+	return english_month[month_number-1];
 	} 
 
 	 else cout << "Dostep do pliku zostal zabroniony!" << endl;
@@ -93,13 +99,13 @@ int main()
 
 		if(OS_Windows)
 
-	{   converter windows;
+	 { 
+		converter windows;
 		cin>>month_number;
 		windows.file_opening();
 		try  
       {
 		windows.month_txt(month_number);
-	//	cout<<month_txt(month_number);
 	  }
 		   catch(string out)
       {
@@ -124,8 +130,7 @@ int main()
          cout<<out<<endl;
       }
 		
-		}
-	
+	  }
 	
     return 0;
 }
