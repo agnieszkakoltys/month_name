@@ -57,15 +57,15 @@ void month_txt(int month_number)
                  throw extension;
             }
             
-	if(language_name=="polski" && month_number>0)
+	if(language_name=="polski" && month_number>0 && month_number<13)
 	{
 	cout << polish_month[month_number-1]<< endl;
 	}
-	else if(language_name=="niemiecki" && month_number>0)
+	else if(language_name=="niemiecki" && month_number>0 && month_number<13)
 	{
 	cout << german_month[month_number-1]<< endl;
 	}
-	else if(language_name=="angielski" && month_number>0)
+	else if(language_name=="angielski" && month_number>0 && month_number<13)
 	{
 	cout <<  english_month[month_number-1]<< endl;
 	} 
