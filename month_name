@@ -17,81 +17,115 @@ int month_number,real_month_number;
 char bufor[ 1024 ];
 char data[ 255 ];
 fstream file, testfile;
-string language_name, polish_name[12], german_name[12];
-string polish_months[12] = {"Styczeä","Luty","Marzec","Kwiecieä","Maj","Czerwiec","Lipiec","Sierpieä","Wrzesieä","Pa«dziernik","Listopad","Grudzieä"};
-string german_months[12] = {"Januar","Februar","M„rz","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"};
-string english_months[12] = {"January","February","March","April","May","June","July","August","September","October","November","December"};
+string language_name, polish_name[12], german_name[12],costam;
+string polish_month[12] = {"Styczeä","Luty","Marzec","Kwiecieä","Maj","Czerwiec","Lipiec","Sierpieä","Wrzesieä","Pa«dziernik","Listopad","Grudzieä"};
+string german_month[12] = {"Januar","Februar","M„rz","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"};
+string english_month[12] = {"January","February","March","April","May","June","July","August","September","October","November","December"};
 
-string linux_polish_months[12] = {"Styczeń","Luty","Marzec","Kwiecień","Maj","Czerwiec","Lipiec","Sierpień","Wrzesień","Październik","Listopad","Grudzień"};
-string linux_german_months[12] = {"Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"};
+string linux_polish_month[12] = {"Styczeń","Luty","Marzec","Kwiecień","Maj","Czerwiec","Lipiec","Sierpień","Wrzesień","Październik","Listopad","Grudzień"};
+string linux_german_month[12] = {"Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"};
 
-void fun()
+void data_for_linux()
+{
+		  polish_month[month_number-1] = linux_polish_month[month_number-1];
+		  german_month[month_number-1] = linux_german_month[month_number-1];
+}
+class converter
+{
+public:
+void file_opening()
 {
 	file.open( "conf.txt", ios::in );
 if( file.good() == true )
+{
+
+	file.getline( data, 255 ); //reading first line 
+
+	language_name = data;
+
+	//costam = language_name + "_month";
+	//cout <<costam;
+
+}
+}
+public:
+void month_txt(int month_number)
+{
+
+	    if (month_number <= 0 || month_number > 12)    {
+                 string extension = "Zla liczba";
+                 throw extension;
+            }
+            
+	if(language_name=="polski" && month_number>0)
+	{
+	cout << polish_month[month_number-1]<< endl;
+	}
+	else if(language_name=="niemiecki" && month_number>0)
+	{
+	cout << german_month[month_number-1]<< endl;
+	}
+	else if(language_name=="angielski" && month_number>0)
+	{
+	cout <<  english_month[month_number-1]<< endl;
+	} 
+
+	 else cout << "Dostep do pliku zostal zabroniony!" << endl;
+	file.close();
+}
+public:
+void test_export()
 {
 	if( testfile.good() == true )
 	{
 	remove("test.h");
 	};
 
-	file.getline( data, 255 ); //reading first line 
-
-	file.getline( bufor, 255 ); //reading second line 
-
-	language_name = data;
-
-	month_number = stoi(bufor);
-
-	real_month_number=month_number%12;
-
-	if(month_number==12 || month_number%12==0)
-	{
-	real_month_number=12;
-	}
-
-	if(language_name=="polski" && month_number>0)
-	{
-	cout << polish_months[real_month_number-1]<< endl;
-	}
-	else if(language_name=="niemiecki" && month_number>0)
-	{
-	cout << german_months[real_month_number-1]<< endl;
-	}
-	else if(language_name=="angielski" && month_number>0)
-	{
-	cout <<  english_months[real_month_number-1]<< endl;
-	} 
-	
-	} else cout << "Dostep do pliku zostal zabroniony!" << endl;
-	file.close();
-
 	fstream testfile( "test.h", ios::out );
 
 	if( testfile.good() == true )
 	{
 	testfile << "int month_number =" <<month_number<<";"<<endl;
-	testfile << "int real_month_number =" <<real_month_number<<";"<<endl;
 	};
 }
+};
 
 int main()
 {  
 
 		if(OS_Windows)
-	{
-		
-		fun();
+
+	{   converter windows;
+		cin>>month_number;
+		windows.file_opening();
+		try  
+      {
+		windows.month_txt(month_number);
+	  }
+		   catch(std::string out)
+      {
+         cout<<out<<endl;
+      }
+		windows.test_export();
 		system("PAUSE");
 		
 		
 	}
 	   else if(!OS_Windows) // if OS is unix
 	   {
-
-		  polish_months[real_month_number-1] = linux_polish_months[real_month_number-1];
-		  german_months[real_month_number-1] = linux_german_months[real_month_number-1];
-		  fun();
+		  converter linux;
+		  cin>>month_number;
+		  data_for_linux();
+		  linux.file_opening();
+		  try  
+      {
+		linux.month_txt(month_number);
+	  }
+		   catch(std::string out)
+      {
+         cout<<out<<endl;
+      }
+		  linux.test_export();
 		}
 	
 	
