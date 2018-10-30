@@ -90,7 +90,6 @@ string month_txt(int month_number)
 	} 
 
 	 else cout << "Dostep do pliku zostal zabroniony!" << endl;
-	file.close();
 }
 
 };
