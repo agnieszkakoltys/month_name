@@ -13,8 +13,7 @@
 #include <string>
 #include <fstream>
 using namespace std;
-int month_number,real_month_number;
-char bufor[ 1024 ];
+int month_number;
 char data[ 255 ];
 fstream file, testfile;
 string language_name, polish_name[12], german_name[12],costam;
